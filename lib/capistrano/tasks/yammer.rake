@@ -1,10 +1,4 @@
 Capistrano::Configuration.instance(:must_exist).load do
-  require "yammer_client"
-
-  before "deploy",          "yammer:notify_deploy_start"
-  after  "deploy",          "yammer:notify_deploy_success"
-  after  "deploy:rollback", "yammer:notify_deploy_fail"
-
   namespace :yammer do
     desc "Notify a Yammer account that a deploy just started"
     task :notify_deploy_start do
@@ -33,4 +27,8 @@ Capistrano::Configuration.instance(:must_exist).load do
     action_name = format "%-5s", action
     "#{action_name}: #{task_name} [#{stage}:#{branch}] by【#{name}】"
   end
+
+  before "deploy",          "yammer:notify_deploy_start"
+  after  "deploy",          "yammer:notify_deploy_success"
+  after  "deploy:rollback", "yammer:notify_deploy_fail"
 end

@@ -4,4 +4,5 @@ module Capistrano
 end
 
 require "capistrano/yammer/version"
-require "capistrano/yammer/tasks/capistrano-yammer.rake"
+require "yammer_client"
+load File.expand_path("../tasks/yammer.rake", __FILE__)
