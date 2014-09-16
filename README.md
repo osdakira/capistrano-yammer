@@ -1,24 +1,35 @@
 # Capistrano::Yammer
 
-TODO: Write a gem description
+capistrano notification for yammer
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'capistrano-yammer'
+    gem "yammer_client", github: "osdakira/yammer_client"
+    gem "capistrano-yammer", github: "osdakira/capistrano-yammer"
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install capistrano-yammer
-
 ## Usage
 
-TODO: Write usage instructions here
+Add to `Capifile`
+
+```rb
+require "capistrano/yammer"
+```
+
+Set to `config/deploy.rb`
+
+```rb
+set :yammer_options, {
+  oauth_token: ENV["YAMMER_OAUTH_TOKEN"] || "hoge",
+  group_id: 1234,
+  replied_to_id: 5678
+}
+```
 
 ## Contributing
 
