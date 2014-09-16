@@ -22,10 +22,10 @@ Capistrano::Configuration.instance(:must_exist).load do
   end
 
   def make_message(action)
-    name = `git config --get user.name`.chomp
+    name = `git config --get user.name`.strip
     task_name = @logger.instance_variable_get(:@options)[:actions].last.capitalize || "Deploy"
     action_name = format "%-5s", action
-    "#{action_name}: #{task_name} [#{stage}:#{branch}] by【#{name}】"
+    "#{application.upcase}::#{action_name}: #{task_name} [#{stage}:#{branch}] by【#{name}】"
   end
 
   before "deploy",          "yammer:notify_deploy_start"
