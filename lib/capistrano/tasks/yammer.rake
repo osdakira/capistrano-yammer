@@ -2,17 +2,19 @@ Capistrano::Configuration.instance(:must_exist).load do
   namespace :yammer do
     desc "Notify a Yammer account that a deploy just started"
     task :notify_deploy_start do
+      next unless fetch(:yammer_options, nil)
       yammer.notify(yammer_message("[START]"))
     end
 
     desc "Notify a Yammer account that a deploy just finished"
     task :notify_deploy_success do
+      next unless fetch(:yammer_options, nil)
       yammer.notify(yammer_message("[END]"))
-
     end
 
     desc "Notify a Yammer account that a deploy just failed"
     task :notify_deploy_fail do
+      next unless fetch(:yammer_options, nil)
       yammer.notify(yammer_message("end"))
     end
   end
